@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    
     <title>Contact Us</title>
   </head>
   <body>
     <h1>Contact Us</h1>
     <p>Feel free to contact us using the information below:</p>
     <ul>
-      <li>Email: <a href="mailto:s202017460@kfupm.edu.sa">s202017460@kfupm.edu.sa</a></li>
+      <li>
+        Email:
+        <a href="mailto:s202017460@kfupm.edu.sa">s202017460@kfupm.edu.sa</a>
+      </li>
       <li>Phone: <a href="tel:+966599555555">+966599555555</a></li>
-      <hr>
-      
+      <hr />
+      <p><em>Send a massage</em></p>
+      <form action="confirmation.html" method="post">
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea><br />
+        <input type="submit" value="Send" />
+      </form>
+      <!--back to main-->
+      <hr />
+      <a href="mainPage.html">Back to main page</a>
     </ul>
   </body>
 </html>
