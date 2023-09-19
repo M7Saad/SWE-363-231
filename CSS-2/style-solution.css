@@ -1,0 +1,26 @@
+/* 1- Change all header cells of your table to uppercase */
+th {
+    text-transform: uppercase;
+}
+
+/* 2- Change all links to green color  */
+a {
+    color: green;
+}
+
+/* 3-  change all cells back-ground color “top” to red gold color */
+td.top {
+    background-color: gold;
+}
+
+/*4- Change the background of any <em> to blue*/
+em {
+    background-color: blue;
+}
+
+
+/* 5- Change the element with id “the_most_important” to all caps and gold background. */
+#the_most_important {
+    text-transform: uppercase;
+    background-color: gold;
+}
