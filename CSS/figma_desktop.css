@@ -342,3 +342,51 @@ body {
   button:hover {
     background-color: red;
   }
+
+  /* loading ((@(!)#(@ */
+
+.content {
+  opacity: 0;
+  pointer-events: none; 
+  animation: fade-in 2.3s step-end forwards;
+}
+
+@keyframes fade-in {
+  to {
+      opacity: 1; 
+      pointer-events: auto;
+  }
+}
+
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #3498db;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite, hide-loader 0.3s ease-in-out 2s forwards;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotate(0deg);
+  }
+
+  100% {
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes hide-loader {
+  to {
+      opacity: 0;
+      display: none;
+  }
+}
