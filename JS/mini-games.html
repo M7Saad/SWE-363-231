@@ -130,6 +130,7 @@
             // change the title
             document.getElementById("turn").innerHTML =
               "The winner is " + winner;
+            return;
           }
 
           //if there is no winner
@@ -145,7 +146,7 @@
             gameEnded = true;
             // change the title
             document.getElementById("turn").innerHTML =
-                "It's a tie, try again!";
+              "It's a tie, try again!";
           }
         }
         // check if there is a winner
