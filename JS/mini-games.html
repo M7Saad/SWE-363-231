@@ -66,13 +66,17 @@
 
       <!-- reset button -->
       <div class="text-center">
-        <button class="btn btn-primary mt-3">Reset</button>
+        <button class="btn btn-danger mt-3">Reset</button>
+        <button class="btn btn-secondary mt-3" id="inst">
+          Playing with keyboard?
+        </button>
       </div>
 
       <script>
         // decided which turn is it
         let turn = "X";
         let gameEnded = false;
+        let gameStarted = false;
 
         // when we click on a cell add the letter
         let board = document.getElementsByClassName("board")[0];
@@ -80,15 +84,13 @@
 
         function cellClicked(event) {
           // if the clicked cell is not empty or the clicked element is not a cell, return
-          if (
-            event.target.innerText !== "" ||
-            event.target.tagName === "BUTTON"
-          ) {
+          if (event.target.innerText !== "") {
             return;
           }
           if (gameEnded) {
             return;
           } else {
+            gameStarted = true;
             let cell = event.target;
             cell.innerText = turn;
             // change turn
@@ -120,6 +122,7 @@
 
           // reset the gameEnded
           gameEnded = false;
+          gameStarted = false;
         }
 
         function checkIfgameEnded() {
@@ -189,6 +192,49 @@
             return cells[2].innerText;
           }
         }
+
+        //for instructions button
+        let inst = document.querySelector("#inst");
+        //when mouse is over the button
+        inst.addEventListener("mouseover", function () {
+          if (gameEnded || gameStarted) {
+            return;
+          }
+          //fill each cell with a number
+          let cells = document.querySelectorAll(".cell");
+          for (let i = 0; i < cells.length; i++) {
+            cells[i].innerText = i + 1;
+          }
+          //change the title to instructions
+          document.getElementById("turn").innerHTML =
+            "Here is the numbers, click R to reset";
+        });
+
+        inst.addEventListener("mouseout", function () {
+          if (gameEnded || gameStarted) {
+            return;
+          }
+          //remove the numbers
+          let cells = document.querySelectorAll(".cell");
+          for (let i = 0; i < cells.length; i++) {
+            cells[i].innerText = "";
+          }
+          //change the title to instructions
+          document.getElementById("turn").innerHTML =
+            "Now it's is <span>X</span> turn";
+        });
+
+        //for keyboard
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "r") {
+            reset();
+          } else if (event.key >= "1" && event.key <= "9") {
+            let number = parseInt(event.key);
+            let cell = document.querySelectorAll(".cell")[number - 1];
+            // simulate a click on the cell element
+            cell.click();
+          }
+        });
       </script>
     </div>
   </body>
