@@ -39,6 +39,14 @@
         </p>
       </article>
       <hr />
+      <h1>IS THIS NUMBER EVEN?!?!</h1>
+      <p>Enter a number to check!</p>
+      <input type="number" id="num" name="num" />
+      <p>
+        <button onclick="isEven()">Click me to check</button>
+      </p>
+
+      <hr />
       <aside>
         <h2>Here is an image of THE IRON THRONE</h2>
         <figure>
@@ -73,5 +81,32 @@
 
       <p>&copy; 2023 Mohammed Alquraini. All rights reserved.</p>
     </footer>
+    <!--Script-->
+    <script>
+      function isEven() {
+        var num = document.getElementById("num").value;
+        if (num < 0 || num >= 10e6) {
+          alert(
+            "Please enter a small positive number! side note: i can't afford a server so i cant handle negative numbers or large ones :("
+          );
+          return;
+        }
+        //using fetch api to get data from the api
+        //the use of this api is to check if a number is even or not
+        //the process is of checking the number is quite complicated
+        //so i used an api to do it for me
+        var url = "https://api.isevenapi.xyz/api/iseven/" + num;
+        fetch(url)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.iseven == true) {
+              alert("Congrats! The number is even!");
+            } else {
+              alert("Sorry! :( The number is odd!");
+            }
+          })
+          .catch((error) => console.error(error));
+      }
+    </script>
   </body>
 </html>
