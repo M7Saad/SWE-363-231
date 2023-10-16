@@ -9,7 +9,6 @@
       content="A survey to assess problem solving skills"
     />
     <meta name="keywords" content="Problem Solving, survey" />
-    <link rel="stylesheet" href="dark_theme.css" />
   </head>
   <body>
     <header>
@@ -19,7 +18,7 @@
     </header>
 
     <main>
-      <form action="confirmation_survey.html" method="post">
+      <form action="confirmation_survey.html" method="post" id="fromm">
         <section>
           <h2>Contact Information</h2>
           <label for="email">Email*:</label>
@@ -31,7 +30,14 @@
             autocomplete="email"
           />
         </section>
-
+        <label for="signature">Signature:</label>
+        <canvas
+          id="signatureCanvas"
+          width="300"
+          height="150"
+          aria-required="true"
+        ></canvas>
+        <button id="clearSignature">Clear Signature</button><br /><br />
         <section>
           <h2>Confidence Rating</h2>
           <label for="confidence-rating"
@@ -157,5 +163,51 @@
 
       <p>&copy; 2023 Mohammed Alquraini. All rights reserved.</p>
     </footer>
+    <script>
+      const canvas = document.getElementById("signatureCanvas");
+      const context = canvas.getContext("2d");
+      const clearButton = document.getElementById("clearSignature");
+
+      let drawing = false;
+
+      canvas.addEventListener("mousedown", () => {
+        drawing = true;
+      });
+
+      canvas.addEventListener("mouseup", () => {
+        drawing = false;
+        context.beginPath();
+      });
+
+      canvas.addEventListener("mousemove", (e) => {
+        if (!drawing) return;
+        context.lineWidth = 2;
+        context.lineCap = "round";
+        context.strokeStyle = "black";
+        context.lineTo(
+          e.clientX - canvas.getBoundingClientRect().left,
+          e.clientY - canvas.getBoundingClientRect().top
+        );
+        context.stroke();
+      });
+
+      clearButton.addEventListener("click", () => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
+      });
+
+      const form = document.getElementById("formm");
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const signatureImage = canvas.toDataURL("image/png");
+        const signatureInput = document.createElement("input");
+        signatureInput.type = "hidden";
+        signatureInput.name = "signature";
+        signatureInput.value = signatureImage;
+        //include the signature in the form submission
+        form.appendChild(signatureInput);
+        form.submit();
+      });
+    </script>
   </body>
 </html>
