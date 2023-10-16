@@ -10,77 +10,93 @@
     <meta name="keywords" content="Problem Solving, habit" />
     <link rel="stylesheet" href="dark_theme.css" />
     <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   </head>
+  <style>
+    #screensaver {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      z-index: 999;
+    }
+  </style>
 
   <body>
-    <header>
-      <h1>
-        Why Don't We Consider Problem Solving as a Habit (or maybe hobby)?
-      </h1>
-    </header>
-    <hr />
-    <main>
-      <article>
+    <div id="screensaver"></div>
+    <div id="website">
+      <header>
+        <h1>
+          Why Don't We Consider Problem Solving as a Habit (or maybe hobby)?
+        </h1>
+      </header>
+      <hr />
+      <main>
+        <article>
+          <p>
+            Why don't we consider problem solving as a habit or hobby? It's an
+            everyday skill we use, from navigating daily challenges to
+            deciphering puzzles. Embracing problem solving as a regular practice
+            can not only boost our cognitive abilities but also provide a source
+            of enjoyment in the process. So, perhaps it's time we make problem
+            solving a deliberate habit or even a hobby, appreciating the
+            satisfaction it brings when we find solutions to life's puzzles.
+          </p>
+
+          <p>
+            <em>in this website, i will discuss this issue and address it</em>
+          </p>
+          <p>
+            <a href="details.html"> Why Problem Solving Should Be a habit? </a>
+          </p>
+        </article>
+        <hr />
+        <h1>IS THIS NUMBER EVEN?!?!</h1>
+        <p>Enter a number to check!</p>
+        <input type="number" id="num" name="num" />
         <p>
-          Why don't we consider problem solving as a habit or hobby? It's an
-          everyday skill we use, from navigating daily challenges to deciphering
-          puzzles. Embracing problem solving as a regular practice can not only
-          boost our cognitive abilities but also provide a source of enjoyment
-          in the process. So, perhaps it's time we make problem solving a
-          deliberate habit or even a hobby, appreciating the satisfaction it
-          brings when we find solutions to life's puzzles.
+          <button onclick="isEven()">Click me to check</button>
         </p>
 
+        <hr />
+        <aside>
+          <h2>Here is an image of THE IRON THRONE</h2>
+          <figure>
+            <img
+              src="assets/huh.jpg"
+              alt="IRON THRONE!"
+              style="height: 15pc; width: 15pc"
+            />
+            <figcaption>Image of the Iron Throne</figcaption>
+          </figure>
+        </aside>
+        <hr />
+        <h2>Here are some RAnDoM images!</h2>
+        <div id="imgs"></div>
+      </main>
+      <hr />
+      <footer>
+        <nav>
+          <ul>
+            <li>
+              <a href="details.html">Why Problem Solving Should Be a Habit</a>
+            </li>
+            <li><a href="survey.html">Take our survey</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+          </ul>
+        </nav>
         <p>
-          <em>in this website, i will discuss this issue and address it</em>
+          Contact information: Email:
+          <a href="mailto:s202017460@kfupm.edu.sa">s202017460@kfupm.edu.sa</a>,
+          phone: <a href="tel:+966599555555">+966599555555</a>
         </p>
-        <p>
-          <a href="details.html"> Why Problem Solving Should Be a habit? </a>
-        </p>
-      </article>
-      <hr />
-      <h1>IS THIS NUMBER EVEN?!?!</h1>
-      <p>Enter a number to check!</p>
-      <input type="number" id="num" name="num" />
-      <p>
-        <button onclick="isEven()">Click me to check</button>
-      </p>
 
-      <hr />
-      <aside>
-        <h2>Here is an image of THE IRON THRONE</h2>
-        <figure>
-          <img
-            src="assets/huh.jpg"
-            alt="IRON THRONE!"
-            style="height: 15pc; width: 15pc"
-          />
-          <figcaption>Image of the Iron Throne</figcaption>
-        </figure>
-      </aside>
-      <hr />
-      <h2>Here are some RAnDoM images!</h2>
-      <div id="imgs"></div>
-    </main>
-    <hr />
-    <footer>
-      <nav>
-        <ul>
-          <li>
-            <a href="details.html">Why Problem Solving Should Be a Habit</a>
-          </li>
-          <li><a href="survey.html">Take our survey</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </nav>
-      <p>
-        Contact information: Email:
-        <a href="mailto:s202017460@kfupm.edu.sa">s202017460@kfupm.edu.sa</a>,
-        phone: <a href="tel:+966599555555">+966599555555</a>
-      </p>
-
-      <p>&copy; 2023 Mohammed Alquraini. All rights reserved.</p>
-    </footer>
+        <p>&copy; 2023 Mohammed Alquraini. All rights reserved.</p>
+      </footer>
+    </div>
     <!--Script-->
     <script>
       function isEven() {
@@ -107,6 +123,85 @@
           })
           .catch((error) => console.error(error));
       }
+      /////////////////////////////
+      var camera, scene, material, mesh, geometry, renderer;
+      var screensaverActive = false;
+      var lastInteractionTime = Date.now();
+
+      function drawSphere() {
+        init();
+        animate();
+      }
+
+      function init() {
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(
+          50,
+          window.innerWidth / window.innerHeight,
+          1,
+          1000
+        );
+        camera.position.z = 300;
+        scene.add(camera);
+
+        var radius = 50,
+          segments = 10,
+          rings = 10;
+        geometry = new THREE.SphereGeometry(radius, segments, rings);
+        material = new THREE.MeshNormalMaterial({ color: 0x002288 });
+        mesh = new THREE.Mesh(geometry, material);
+
+        scene.add(mesh);
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById("screensaver").appendChild(renderer.domElement);
+
+        // Handle user interactions to exit screensaver
+        document.addEventListener("mousemove", () => {
+          lastInteractionTime = Date.now();
+          if (screensaverActive) {
+            stopScreensaver();
+          }
+        });
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        render();
+      }
+
+      function render() {
+        mesh.rotation.x += 0.01;
+        mesh.rotation.y += 0.02;
+        renderer.render(scene, camera);
+        checkInactivity();
+      }
+
+      function startScreensaver() {
+        screensaverActive = true;
+        document.getElementById("screensaver").style.display = "block";
+        document.getElementById("website").style.display = "none";
+        document.body.style.cursor = "none";
+      }
+
+      function stopScreensaver() {
+        screensaverActive = false;
+        document.getElementById("screensaver").style.display = "none";
+        document.getElementById("website").style.display = "block";
+        document.body.style.cursor = "default";
+      }
+
+      function checkInactivity() {
+        const currentTime = Date.now();
+        if (currentTime - lastInteractionTime > 60000 && !screensaverActive) {
+          startScreensaver();
+        }
+      }
+
+      // Function call
+      drawSphere();
+      //some part of this code is taken from https://jsfiddle.net/BHUPENDRA1011/4ZwYm/
     </script>
   </body>
 </html>
