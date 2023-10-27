@@ -10,6 +10,31 @@
     <meta name="keywords" content="Contact Us, email, phone" />
     <link rel="stylesheet" href="dark_theme.css" />
   </head>
+  <style>
+    #contact-form {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      margin: 0 auto;
+    }
+    #contact-form label {
+      margin-bottom: 0.5rem;
+    }
+    #contact-form input,
+    #contact-form textarea {
+      margin-bottom: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 0.25rem;
+    }
+    #contact-form button {
+      padding: 0.5rem;
+      border-radius: 0.25rem;
+      border: 1px solid #ccc;
+      background-color: #fff;
+      cursor: pointer;
+    }
+  </style>
   <body>
     <header>
       <h1>Contact Us</h1>
@@ -29,10 +54,17 @@
       <section>
         <h2>Send a Message</h2>
 
-        <form action="confirmation.html" method="post">
+        <form id="contact-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+
           <label for="message">Message:</label>
-          <textarea id="message" name="message" required></textarea><br />
-          <input type="submit" value="Send" />
+          <textarea id="message" name="message" required></textarea>
+
+          <button type="submit">Send</button>
         </form>
       </section>
     </main>
@@ -46,5 +78,66 @@
       </nav>
       <p>&copy; 2023 Mohammed Alquraini. All rights reserved.</p>
     </footer>
+    <script>
+      //array of objects
+      let contacts = [];
+      // class Contact
+      console.log("test");
+      class Contact {
+        constructor(name, email, message) {
+          this.name = name;
+          this.email = email;
+          this.message = message;
+        }
+
+        send() {
+          // Code to send the contact form data to the server
+          console.log(
+            "Sending contact form data:",
+            this.name,
+            this.email,
+            this.message
+          );
+        }
+        get name() {
+          return this._name;
+        }
+        set name(value) {
+          this._name = value;
+        }
+        get email() {
+          return this._email;
+        }
+        set email(value) {
+          this._email = value;
+        }
+        get message() {
+          return this._message;
+        }
+        set message(value) {
+          this._message = value;
+        }
+        //save the object
+        save() {
+          localStorage.setItem("contact", JSON.stringify(this));
+        }
+      }
+      // Create a new instance of the Contact class when the form is submitted
+      document
+        .querySelector("#contact-form")
+        .addEventListener("submit", function (event) {
+          console.log("clicked");
+          event.preventDefault();
+          let name = document.querySelector("#name").value;
+          let email = document.querySelector("#email").value;
+          let message = document.querySelector("#message").value;
+          let contact = new Contact(name, email, message);
+          contact.send();
+          //go to confirmation page
+          window.location.href = "confirmation.html";
+          contacts.push(contact);
+          console.log(contacts);
+        });
+    </script>
   </body>
 </html>
