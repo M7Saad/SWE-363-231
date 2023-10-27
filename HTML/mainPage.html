@@ -99,7 +99,7 @@
     </div>
     <!--Script-->
     <script>
-      function isEven() {
+      const isEven = function () {
         var num = document.getElementById("num").value;
         if (num < 0 || num >= 10e6) {
           alert(
@@ -122,18 +122,18 @@
             }
           })
           .catch((error) => console.error(error));
-      }
+      };
       /////////////////////////////
       var camera, scene, material, mesh, geometry, renderer;
       var screensaverActive = false;
       var lastInteractionTime = Date.now();
 
-      function drawSphere() {
+      const drawSphere = function () {
         init();
         animate();
-      }
+      };
 
-      function init() {
+      const init = function () {
         scene = new THREE.Scene();
         camera = new THREE.PerspectiveCamera(
           50,
@@ -164,44 +164,68 @@
             stopScreensaver();
           }
         });
-      }
+      };
 
-      function animate() {
+      const animate = function () {
         requestAnimationFrame(animate);
         render();
-      }
+      };
 
-      function render() {
+      const render = function () {
         mesh.rotation.x += 0.01;
         mesh.rotation.y += 0.02;
         renderer.render(scene, camera);
         checkInactivity();
-      }
+      };
 
-      function startScreensaver() {
+      const startScreensaver = function () {
         screensaverActive = true;
         document.getElementById("screensaver").style.display = "block";
         document.getElementById("website").style.display = "none";
         document.body.style.cursor = "none";
-      }
+      };
 
-      function stopScreensaver() {
+      const stopScreensaver = function () {
         screensaverActive = false;
         document.getElementById("screensaver").style.display = "none";
         document.getElementById("website").style.display = "block";
         document.body.style.cursor = "default";
-      }
+      };
 
-      function checkInactivity() {
+      const checkInactivity = function () {
         const currentTime = Date.now();
         if (currentTime - lastInteractionTime > 60000 && !screensaverActive) {
           startScreensaver();
         }
-      }
+      };
 
       // Function call
       drawSphere();
       //some part of this code is taken from https://jsfiddle.net/BHUPENDRA1011/4ZwYm/
+
+      // my website is quite simple and I can't see a use for IIFE or nested functions
+      //so i will just use a simple example
+
+      // IIFE
+      (() => {
+        // Code to be executed inside the IIFE
+        console.log("This code is inside an IIFE!");
+
+        function outerFunction() {
+          // Code to be executed inside the outer function
+          console.log("This code is inside the outer function!");
+
+          function innerFunction() {
+            // Code to be executed inside the inner function
+            console.log("This code is inside the inner function!");
+          }
+
+          // Function call
+          innerFunction();
+        }
+        // Function call
+        outerFunction();
+      })();
     </script>
   </body>
 </html>
