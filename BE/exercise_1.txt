@@ -1,7 +1,0 @@
--exercise 1 Answers
-1: https://www.nature.com/
-2: 151.101.64.95
-3: 153 requests
-4: document, font, stylesheet, svg, xml, webp, png, jpeg, script, gif, xhr, fetch, text, redirect, manifest.
-5: a script file
-6: 498 ms.
