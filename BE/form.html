@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Form</title>
+    <!---->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>Contact Form</h2>
+      <form action="/submit" method="post">
+        <div class="form-group">
+          <label for="inputName">Name:</label>
+          <input
+            name="name"
+            type="text"
+            class="form-control"
+            id="inputName"
+            placeholder="Enter name"
+            required="required"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputEmail">Email:</label>
+          <input
+            name="email"
+            type="email"
+            class="form-control"
+            id="inputEmail"
+            placeholder="Enter email"
+            required="required"
+          />
+        </div>
+        <div class="form-group">
+          <label for="inputMessage">Message:</label>
+          <textarea
+            name="message"
+            class="form-control"
+            id="inputMessage"
+            rows="3"
+            placeholder="Enter message"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
